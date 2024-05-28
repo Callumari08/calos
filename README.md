@@ -4,3 +4,4 @@
 - nasm
 - gcc
 - limine (bootloader)
+- make
