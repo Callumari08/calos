@@ -1,0 +1,17 @@
+# Kernel
+kernel/image.hdd
+kernel/image.iso
+kernel/main.c.d
+kernel/main.c.o
+
+kernel/bin/
+kernel/limine/
+kernel/obj
+
+# Limine
+limine/
+
+# Other Build Stuff
+iso_root/
+image.hdd
+image.iso

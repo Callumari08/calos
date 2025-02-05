@@ -110,5 +110,5 @@ obj/%.asm.o: src/%.asm GNUmakefile
 .PHONY: clean
 clean:
 	rm -rf bin obj
-	bash makebios.sh clean
+	../makebios.sh clean ../
 	# bash makeuefi.sh clean
