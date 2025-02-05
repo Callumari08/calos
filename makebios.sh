@@ -1,14 +1,7 @@
 if [ "$1" = "clean" ]; then
     set -e
-    location="."
-
-    # If the user has specified a directory to be cleaned
-    if [ -n "$2" ]; then 
-        location="$2"
-    fi
-
     echo "Cleaning..."
-    rm -rf "$location/iso_root/" "$location/limine/"
+    rm -rf iso_root/ limine/
     echo "Done!"
     exit
 fi

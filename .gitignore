@@ -1,6 +1,4 @@
-# Kernel
-kernel/image.hdd
-kernel/image.iso
+# Kernel Build
 kernel/main.c.d
 kernel/main.c.o
 
@@ -11,7 +9,7 @@ kernel/obj
 # Limine
 limine/
 
-# Other Build Stuff
+# ISO Build
 iso_root/
 image.hdd
 image.iso
