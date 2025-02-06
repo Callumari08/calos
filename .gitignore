@@ -8,3 +8,6 @@ limine/
 # Root
 iso_root/
 bin/
+
+# Editor Stuff
+.vscode/

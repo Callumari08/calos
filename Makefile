@@ -1,11 +1,13 @@
 build:
 	make -C kernel/
 	./makebios.sh
+	mkdir bin/
 	mv image.iso bin/
 
 build_usb:
 	make -C kernel/
 	./makebios_usb.sh
+	mkdir bin/
 	mv image.hdd bin/
 
 # run uses QEMU
@@ -14,9 +16,7 @@ run: build
 	-enable-kvm \
 	-m 2G \
 	-cdrom bin/image.iso
-	
-
 clean:
-	cd kernel
 	make -C kernel/ clean
-	./makebios.sh clean 
+	./makebios.sh clean
+	rm -r bin/

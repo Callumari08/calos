@@ -7,7 +7,7 @@ MAKEFLAGS += -rR
 override OUTPUT := calos
 
 # User controllable C compiler command.
-CC := cc
+CC := clang
 
 # User controllable C flags.
 CFLAGS := -g -O2 -pipe
