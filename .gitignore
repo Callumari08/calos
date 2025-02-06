@@ -1,15 +1,10 @@
 # Kernel Build
-kernel/main.c.d
-kernel/main.c.o
-
 kernel/bin/
-kernel/limine/
-kernel/obj
+kernel/obj/
 
 # Limine
 limine/
 
-# ISO Build
+# Root
 iso_root/
-image.hdd
-image.iso
+bin/

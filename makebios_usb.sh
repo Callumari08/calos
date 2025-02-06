@@ -11,7 +11,7 @@ git clone https://github.com/limine-bootloader/limine.git --branch=v8.x-binary -
 make -C limine
 
 # Install the Limine BIOS stages onto the image.
-./../limine/limine bios-install image.hdd
+./limine/limine bios-install image.hdd
 
 # Format the image as fat32.
 mformat -i image.hdd@@1M
@@ -20,7 +20,7 @@ mformat -i image.hdd@@1M
 mmd -i image.hdd@@1M ::/EFI ::/EFI/BOOT ::/boot ::/boot/limine
 
 # Copy over the relevant files.
-mcopy -i image.hdd@@1M bin/calos ::/boot
-mcopy -i image.hdd@@1M deps/limine/limine.conf limine/limine-bios.sys ::/boot/limine
+mcopy -i image.hdd@@1M kernel/bin/calos ::/boot
+mcopy -i image.hdd@@1M kernel/deps/limine/limine.conf limine/limine-bios.sys ::/boot/limine
 mcopy -i image.hdd@@1M limine/BOOTX64.EFI ::/EFI/BOOT
 mcopy -i image.hdd@@1M limine/BOOTIA32.EFI ::/EFI/BOOT
