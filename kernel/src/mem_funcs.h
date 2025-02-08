@@ -1,3 +1,6 @@
+#ifndef MEM_FUNC_H
+#define MEM_FUNC_H
+
 #include <stddef.h>
 #include <stdint.h>
 
@@ -68,3 +71,4 @@ int memcmp(const void* s1, const void* s2, size_t n)
 
   return 0;
 }
+#endif

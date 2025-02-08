@@ -1,41 +1,8 @@
-// Using Limine
-
+#include "low_level_rendering/frame_buffer.h"
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 
-#include "../deps/limine/limine.h"
-
-// Set the base revision to 3, this is recommended as this is the latest
-// base revision described by the Limine boot protocol specification.
-// See specification for further info.
-
-__attribute__((
-    used, section(".limine_requests"))) static volatile LIMINE_BASE_REVISION(3);
-
-// The Limine requests can be placed anywhere, but it is important that
-// the compiler does not optimise them away, so, usually, they should
-// be made volatile or equivalent, _and_ they should be accessed at least
-// once or marked as used with the "used" attribute as done here.
-
-__attribute__((
-    used,
-    section(
-        ".limine_requests"))) static volatile struct limine_framebuffer_request
-    framebuffer_request = {.id = LIMINE_FRAMEBUFFER_REQUEST, .revision = 0};
-
-// Finally, define the start and end markers for the Limine requests.
-// These can also be moved anywhere, to any .c file, as seen fit.
-
-__attribute__((used,
-               section(".limine_requests_"
-                       "start"))) static volatile LIMINE_REQUESTS_START_MARKER;
-
-__attribute__((
-    used,
-    section(
-        ".limine_requests_end"))) static volatile LIMINE_REQUESTS_END_MARKER;
-
-// Halt and catch fire function.
 static void hcf(void)
 {
   for (;;)
@@ -44,35 +11,13 @@ static void hcf(void)
   }
 }
 
-// The following will be our kernel's entry point.
-// If renaming kmain() to something else, make sure to change the
-// linker script accordingly.
-void kmain(void)
+/// This must be jumped to from a bootloader adapter.
+/// The linker uses the label `boot_start` as the entry point.
+/// This means that this code is bootloader agnostic.
+void kernel_start()
 {
-  // Ensure the bootloader actually understands our base revision (see spec).
-  if (LIMINE_BASE_REVISION_SUPPORTED == false)
-  {
-    hcf();
-  }
+  // For example, draw a white pixel at the center of the screen.
+  draw_pixel(&fb, fb.width / 2, fb.height / 2, 0xFFFFFFFF);
 
-  // Ensure we got a framebuffer.
-  if (framebuffer_request.response == NULL ||
-      framebuffer_request.response->framebuffer_count < 1)
-  {
-    hcf();
-  }
-
-  // Fetch the first framebuffer.
-  struct limine_framebuffer* framebuffer =
-      framebuffer_request.response->framebuffers[0];
-
-  // Note: we assume the framebuffer model is RGB with 32-bit pixels.
-  for (size_t i = 0; i < 100; i++)
-  {
-    volatile uint32_t* fb_ptr = framebuffer->address;
-    fb_ptr[i * (framebuffer->pitch / 4) + i] = 0xffffff;
-  }
-
-  // We're done, just hang...
   hcf();
 }

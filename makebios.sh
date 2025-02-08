@@ -20,7 +20,7 @@ mkdir -p iso_root
 mkdir -p iso_root/boot
 cp -v kernel/bin/calos iso_root/boot/
 mkdir -p iso_root/boot/limine
-cp -v kernel/deps/limine/limine.conf limine/limine-bios.sys limine/limine-bios-cd.bin \
+cp -v kernel/src/deps/limine/limine.conf limine/limine-bios.sys limine/limine-bios-cd.bin \
 limine/limine-uefi-cd.bin iso_root/boot/limine/
 
 # Create the EFI boot tree and copy Limine's EFI executables over.
